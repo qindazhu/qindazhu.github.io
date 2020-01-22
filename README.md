@@ -1,2 +1,2 @@
 # qindazhu.github.io
-my page
+Home page https://qindazhu.github.io/

@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Haowen's Blog
+title: Dazhu's Blog
 subtitle: ''
 description: ''
 keywords:
-author: Haowen Qiu
+author: Qin Dazhu
 language: zh
 timezone: 'Asia/Shanghai'
 
@@ -93,11 +93,11 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: me
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
   repo: https://github.com/qindazhu/qindazhu.github.io
-  branch: gh-pages
+  branch: master

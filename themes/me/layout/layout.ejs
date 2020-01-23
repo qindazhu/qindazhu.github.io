@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+<head>
+    <%- partial('_partial/head',{cache: true}) %>
+</head>
+<body>
+    <div class="wrapper">
+        <%- partial('_partial/header',{cache: true}) %>
+        <div class="main">
+            <%- body %>
+        </div>
+        <%- partial('_partial/footer',{cache: true}) %>
+    </div>
+
+    <%# canvas_nest %>
+    <% if(theme.canvas_nest.enable===true){ %>
+    <script src="<%- url_for(theme.canvas_nest.src) %>" color="<%- theme.canvas_nest.color %>" opacity="<%- theme.canvas_nest.opacity %>" zIndex="<%- theme.canvas_nest.zIndex %>" count="<%- theme.canvas_nest.count %>" ></script>
+    <% } %>
+
+</body>
+</html>

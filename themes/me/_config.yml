@@ -114,7 +114,7 @@ gitalk:
   repo: blog-comments # repo name to store comments
   admin: qindazhu # owner of repo above
   clientID: 366c14e3419153f51738  # application id and secret
-  clientSecret: b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0
+  clientSecret: 7b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0
 
 # plugin functions
 ## Mathjax: Math Formula Support

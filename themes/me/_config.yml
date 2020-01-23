@@ -77,6 +77,10 @@ post_toc_enable: true
 # Page
 page_title_enable: true
 
+# nav in post
+page_nav_enable: false
+post_home_back_enable: false
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in

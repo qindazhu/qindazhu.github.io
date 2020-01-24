@@ -1,7 +1,11 @@
 ---
 title: Create your personal blog with Hexo and GitHub
 date: 2020-01-23 20:12:30
-tags:
+tags:  
+- Hexo
+- GitHub
+categories:
+- [Hexo]
 ---
 ## Install Hexo
 1. Install `Git` and `Node`

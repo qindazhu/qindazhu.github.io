@@ -1,7 +1,13 @@
 ---
 title: 自定义Hexo Theme
 date: 2020-01-23 19:59:20
-tags:
+tags:  
+- Hexo
+- Hexo Theme
+- Chic
+- Theme Next
+categories:
+- [Hexo]
 ---
 [Next](https://github.com/theme-next/hexo-theme-next)是现在大家用的比较多的Hexo主题，你也可以在[Hexo 官网](https://hexo.io/themes/)去寻找自己喜欢的主题。我个人因为喜欢比较简洁的风格，所以选择了[Chic](https://github.com/Siricee/hexo-theme-Chic)这个主题。
 
@@ -22,7 +28,7 @@ $ git rm --cached .
 
 ## 添加动态背景
 个人比较喜欢[canvas-nest]( https://github.com/theme-next/theme-next-canvas-nest)这个动效，添加方式如下：
-1. 从上述链接处下载`canvas-nest.min.js`文件放在`themes/me/source/js/`下
+1. 从上述链接处下载`canvas-nest.min.js`（如果不想在手机上显示，可以使用`canvas-nest-nomobile.min.js`文件）文件放在`themes/me/source/js/`下
 2. 在**_config.yml**里添加canvas_nest的配置项
 ```
 canvas_nest:

@@ -1,7 +1,12 @@
 ---
 title: Add gitalk to your blog to support comments
 date: 2020-01-23 22:13:58
-tags:
+tags:  
+- Hexo
+- gitalk
+- blog comments
+categories:
+- [Hexo]
 ---
 [gitalk](https://github.com/gitalk/gitalk) is a modern comment component based on GitHub Issue and Preact. You can integrate gitalk to your blog to support `comments`.
 

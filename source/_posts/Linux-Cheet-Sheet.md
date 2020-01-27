@@ -131,3 +131,4 @@ categories:
 ## Links
 -  http://cheatsheetworld.com/programming/unix-linux-cheat-sheet/
 -  https://files.fosswire.com/2007/08/fwunixref.pdf
+- https://www.cs.oberlin.edu/~kuperman/help/vim/silly.html

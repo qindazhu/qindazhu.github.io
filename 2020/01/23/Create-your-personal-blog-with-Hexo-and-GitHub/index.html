@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Qin Dazhu">
+
+
+
+
+
+<title>Create your personal blog with Hexo and GitHub | Dazhu&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f2cc6cb138864854619b2aa388016aab";
+    var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Dazhu&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Dazhu&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Create your personal blog with Hexo and GitHub</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Qin Dazhu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 23, 2020&nbsp;&nbsp;20:12:30</a>
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    
+                        <span class="post-category">
+                        Category:
+                            
+                                <a href="/categories/Hexo/">Hexo</a>
+                            
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    <section class="post-tags">
+                        <div>
+                            <span>Tags:</span>
+                            <span class="tag">
+                            
+                                
+                                <a href="/tags/Hexo/">Hexo</a>
+                                
+                                <a href="/tags/GitHub/">GitHub</a>
+                                
+                            
+                            </span>
+                        </div>
+
+                    </section>
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Install-Hexo"><a href="#Install-Hexo" class="headerlink" title="Install Hexo"></a>Install Hexo</h2><ol>
+<li>Install <code>Git</code> and <code>Node</code></li>
+<li>Intall Hexo <code>$ npm install -g hexo-cli</code></li>
+</ol>
+<h2 id="Set-up-your-blog-files"><a href="#Set-up-your-blog-files" class="headerlink" title="Set up your blog files"></a>Set up your blog files</h2><p>Once Hexo is installed, run the following commands to initialize Hexo in the target <code>&lt;folder&gt;</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<h2 id="Create-a-Repo-on-GitHub"><a href="#Create-a-Repo-on-GitHub" class="headerlink" title="Create a Repo on GitHub"></a>Create a Repo on GitHub</h2><p>Create a repo on GitHub with repo name as <code>[your_github_username].github.io</code>.</p>
+<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><ol>
+<li>Install deployer tool <code>npm install hexo-deployer-git --save</code></li>
+<li>Add the following configurations to <strong>_config.yml</strong> in the folder you created with <code>hexo init</code> just now.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;&lt;username&gt;&#x2F;&lt;username.github.io&gt;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
+<li>Run <code>hexo clean &amp;&amp; hexo deploy</code></li>
+<li>Check the webpage at <code>username.github.io</code></li>
+</ol>
+<h2 id="Host-your-Source-files"><a href="#Host-your-Source-files" class="headerlink" title="Host your Source files"></a>Host your Source files</h2><p>Note that if you follow the above steps to deploy your blog, the <code>master</code> branch will only host the <strong>published files</strong>. There is another branch <code>gh-pages</code> hosting your <strong>source files</strong>.  You may want to host the source files with <strong>Pull Request</strong> approach. One way to do that is clone the repo<code>&lt;username.github.io&gt;</code> to locale and copy the <code>.git</code> folder to <code>&lt;my-blog-folder&gt;</code> created by <code>hexo init</code>, then checkout another branch (such as with name <code>hexo-dev</code>) as the working branch and create PR to branch to <code>gh-pages</code> branch if there is any change.</p>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><p><a href="https://hexo.io/docs/index.html" target="_blank" rel="noopener">Hexo Documentation</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+
+        
+
+    </article>
+
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '366c14e3419153f51738',
+        clientSecret: '7b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0',
+        id: window.location.pathname,
+        repo: 'blog-comments',
+        owner: 'qindazhu',
+        admin: 'qindazhu'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+    
+
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Qin Dazhu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+
+    
+    
+    <script src="/js/canvas-nest/canvas-nest-nomobile.min.js" color="0,0,0" opacity="0.5" zIndex="-1" count="80" ></script>
+    
+
+</body>
+</html>

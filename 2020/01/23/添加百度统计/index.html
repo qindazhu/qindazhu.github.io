@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Qin Dazhu">
+
+
+
+
+
+<title>添加百度统计 | Dazhu&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f2cc6cb138864854619b2aa388016aab";
+    var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Dazhu&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Dazhu&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">添加百度统计</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Qin Dazhu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 23, 2020&nbsp;&nbsp;23:20:24</a>
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    
+                        <span class="post-category">
+                        Category:
+                            
+                                <a href="/categories/Hexo/">Hexo</a>
+                            
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    <section class="post-tags">
+                        <div>
+                            <span>Tags:</span>
+                            <span class="tag">
+                            
+                                
+                                <a href="/tags/Hexo/">Hexo</a>
+                                
+                                <a href="/tags/Blog-Stats/">Blog Stats</a>
+                                
+                            
+                            </span>
+                        </div>
+
+                    </section>
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ol>
+<li>在<a href="https://tongji.baidu.com/web/29894341/welcome/login" target="_blank" rel="noopener">百度统计</a>上注册一个账号：站长版就可以。</li>
+<li>在里面新建一个网站，域名填你的博客地址。</li>
+<li>它会给你一段代码，类似：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var _hmt &#x3D; _hmt || [];</span><br><span class="line">(function() &#123;</span><br><span class="line">  var hm &#x3D; document.createElement(&quot;script&quot;);</span><br><span class="line">  hm.src &#x3D; &quot;https:&#x2F;&#x2F;hm.baidu.com&#x2F;hm.js?your-id&quot;;</span><br><span class="line">  var s &#x3D; document.getElementsByTagName(&quot;script&quot;)[0]; </span><br><span class="line">  s.parentNode.insertBefore(hm, s);</span><br><span class="line">&#125;)();</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>把上述代码拷贝到你的<code>theme</code>下根<code>layout</code>的<code>head</code>部分，比如我的博客是<code>themes/me/layout/_partial/head.ejs</code>，大概过半个小时就能在百度统计上看到网站统计信息了。</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+
+        
+
+    </article>
+
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '366c14e3419153f51738',
+        clientSecret: '7b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0',
+        id: window.location.pathname,
+        repo: 'blog-comments',
+        owner: 'qindazhu',
+        admin: 'qindazhu'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+    
+
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Qin Dazhu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+
+    
+    
+    <script src="/js/canvas-nest/canvas-nest-nomobile.min.js" color="0,0,0" opacity="0.5" zIndex="-1" count="80" ></script>
+    
+
+</body>
+</html>

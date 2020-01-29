@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Qin Dazhu">
+
+
+
+
+
+<title>自定义Hexo Theme | Dazhu&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f2cc6cb138864854619b2aa388016aab";
+    var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Dazhu&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Dazhu&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">自定义Hexo Theme</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Qin Dazhu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 23, 2020&nbsp;&nbsp;19:59:20</a>
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    
+                        <span class="post-category">
+                        Category:
+                            
+                                <a href="/categories/Hexo/">Hexo</a>
+                            
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    <section class="post-tags">
+                        <div>
+                            <span>Tags:</span>
+                            <span class="tag">
+                            
+                                
+                                <a href="/tags/Hexo/">Hexo</a>
+                                
+                                <a href="/tags/Hexo-Theme/">Hexo Theme</a>
+                                
+                                <a href="/tags/Chic/">Chic</a>
+                                
+                                <a href="/tags/Theme-Next/">Theme Next</a>
+                                
+                            
+                            </span>
+                        </div>
+
+                    </section>
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">Next</a>是现在大家用的比较多的Hexo主题，你也可以在<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 官网</a>去寻找自己喜欢的主题。我个人因为喜欢比较简洁的风格，所以选择了<a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank" rel="noopener">Chic</a>这个主题。</p>
+<p>基本上主题的安装方式都一样，下载或者拷贝整个主题文件夹到<code>&lt;your-hexo-folder&gt;/themes</code>文件夹下，然后修改<strong>_config.yml</strong>文件中的<strong>theme</strong>字段为你下载的主题文件夹名。以下就以安装并定制Chic主题为例。</p>
+<h2 id="下载并安装-Chic"><a href="#下载并安装-Chic" class="headerlink" title="下载并安装 Chic"></a>下载并安装 Chic</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> your-hexo-blog-folder</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/Siricee/hexo-theme-Chic.git themes/me</span><br></pre></td></tr></table></figure>
+<p>然后修改<strong>_config.yml</strong>文件中的<strong>theme</strong>字段为me。完了记得</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf themes/me /.git</span><br><span class="line">$ git rm --cached .</span><br></pre></td></tr></table></figure>
+<p>把Chic下的git记录删除，要不然每次提交用<code>git submodule</code>比较麻烦，个人项目没必要。</p>
+<h2 id="添加动态背景"><a href="#添加动态背景" class="headerlink" title="添加动态背景"></a>添加动态背景</h2><p>个人比较喜欢<a href="https://github.com/theme-next/theme-next-canvas-nest" target="_blank" rel="noopener">canvas-nest</a>这个动效，添加方式如下：</p>
+<ol>
+<li>从上述链接处下载<code>canvas-nest.min.js</code>（如果不想在手机上显示，可以使用<code>canvas-nest-nomobile.min.js</code>文件）文件放在<code>themes/me/source/js/</code>下</li>
+<li>在<strong>_config.yml</strong>里添加canvas_nest的配置项<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">canvas_nest:</span><br><span class="line">  enable: true</span><br><span class="line">  onmobile: false # Display on mobile or not</span><br><span class="line">  src: js&#x2F;canvas-nest.min.js</span><br><span class="line">  color: &quot;0,0,0&quot; # RGB values, use &#96;,&#96; to separate</span><br><span class="line">  opacity: 0.5 # The opacity of line: 0~1</span><br><span class="line">  zIndex: -1 # z-index property of the background</span><br><span class="line">  count: 80 # The number of lines</span><br></pre></td></tr></table></figure></li>
+<li>在<code>thems/me/layout/layout.egj</code>添加canvas-nest的调用代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;&lt;%&#x3D; config.language %&gt;&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;%- partial(&#39;_partial&#x2F;head&#39;,&#123;cache: true&#125;) %&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;wrapper&quot;&gt;</span><br><span class="line">        &lt;%- partial(&#39;_partial&#x2F;header&#39;,&#123;cache: true&#125;) %&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;main&quot;&gt;</span><br><span class="line">            &lt;%- body %&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;%- partial(&#39;_partial&#x2F;footer&#39;,&#123;cache: true&#125;) %&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;%#  注意接下来这一段------canvas_nest %&gt;</span><br><span class="line">    &lt;% if(theme.canvas_nest.enable&#x3D;&#x3D;&#x3D;true)&#123; %&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;&lt;%- url_for(theme.canvas_nest.src) %&gt;&quot; color&#x3D;&quot;&lt;%- theme.canvas_nest.color %&gt;&quot; opacity&#x3D;&quot;&lt;%- theme.canvas_nest.opacity %&gt;&quot; zIndex&#x3D;&quot;&lt;%- theme.canvas_nest.zIndex %&gt;&quot; count&#x3D;&quot;&lt;%- theme.canvas_nest.count %&gt;&quot; &gt;&lt;&#x2F;script&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+
+        
+
+    </article>
+
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '366c14e3419153f51738',
+        clientSecret: '7b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0',
+        id: window.location.pathname,
+        repo: 'blog-comments',
+        owner: 'qindazhu',
+        admin: 'qindazhu'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+    
+
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Qin Dazhu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+
+    
+    
+    <script src="/js/canvas-nest/canvas-nest-nomobile.min.js" color="0,0,0" opacity="0.5" zIndex="-1" count="80" ></script>
+    
+
+</body>
+</html>

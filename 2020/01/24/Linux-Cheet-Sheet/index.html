@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Qin Dazhu">
+
+
+
+
+
+<title>Linux Cheet Sheet | Dazhu&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f2cc6cb138864854619b2aa388016aab";
+    var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Dazhu&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Dazhu&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Linux Cheet Sheet</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Qin Dazhu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 24, 2020&nbsp;&nbsp;12:34:22</a>
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    
+                        <span class="post-category">
+                        Category:
+                            
+                                <a href="/categories/Cheet-Sheet/">Cheet Sheet</a>
+                            
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    <section class="post-tags">
+                        <div>
+                            <span>Tags:</span>
+                            <span class="tag">
+                            
+                                
+                                <a href="/tags/Cheet-Sheet/">Cheet Sheet</a>
+                                
+                                <a href="/tags/Linux/">Linux</a>
+                                
+                            
+                            </span>
+                        </div>
+
+                    </section>
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h2><ul>
+<li><strong>man command</strong> - check the <code>man</code> page of <code>command</code></li>
+<li><strong>command1 | command2</strong> - execute <code>command2</code> with <code>command1</code>‘s output as its input</li>
+</ul>
+<h2 id="File"><a href="#File" class="headerlink" title="File"></a>File</h2><ul>
+<li><strong>ls -la</strong> - formateed listing directory with hidden files</li>
+<li><strong>cd dir</strong> - change directory to dir</li>
+<li><strong>cd</strong> or <strong>cd ~</strong> - change to home</li>
+<li><strong>cd /</strong> - go to the root directory</li>
+<li><strong>cd -</strong> - go to the last directory you were just in</li>
+<li><strong>pwd</strong> - show present working directory</li>
+<li><strong>mkdir dir</strong> - create a directory dir</li>
+<li><strong>rm file</strong> - delete file</li>
+<li><strong>rm -rf dir</strong> - force delete directory dir </li>
+<li><strong>cp file1 file2</strong> - copy file1 to file2</li>
+<li><strong>cp -r dir1 dir2</strong> - copy dir1 to dir2, create dir2 if it doesn’t exit</li>
+<li><strong>mv file1 file2</strong> - rename or move file1 to file2, if file2 is an existing directory, moves file1 into directory file2</li>
+<li><strong>ln -s file link</strong> - create symbolic link <code>link</code> to <code>file</code></li>
+<li><strong>touch file</strong> - create or update file</li>
+<li><strong>cat file</strong> -output the contents of file</li>
+<li><strong>less file</strong> - </li>
+<li><strong>head file</strong> - output the first 10 lines of file</li>
+<li><strong>head file -n 20</strong> - output the first 20 lines of file</li>
+<li><strong>tail file</strong> - output the last 10 lines of file</li>
+<li><strong>tail -f file</strong> - output the contents of file as it grows</li>
+<li><strong>alias name ‘command’</strong> - create an alias for <code>command</code></li>
+</ul>
+<h2 id="System"><a href="#System" class="headerlink" title="System"></a>System</h2><ul>
+<li><strong>shutdown</strong> - shut down machine</li>
+<li><strong>reboot</strong> - restart machine</li>
+<li><strong>date</strong> - show the current date and time</li>
+<li><strong>cal</strong> - show this month’s calendar</li>
+<li><strong>w</strong> - display who is online</li>
+<li><strong>whoami</strong> - who you are logged in as</li>
+<li><strong>uname -a</strong> - show kernel information</li>
+<li><strong>cat /proc/cpuinfo</strong> - cpu information</li>
+<li><strong>cat /proc/meminfo</strong> -memory information</li>
+<li><strong>df -h</strong> - show disk usage, human readable</li>
+<li><strong>du -h</strong> - show directory space usage</li>
+<li><strong>free</strong> - show memory and swap usage</li>
+<li><strong>whereis app</strong> - show possible location of app</li>
+<li><strong>which app</strong> - show which app will be run by default</li>
+</ul>
+<h2 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h2><ul>
+<li><strong>grep pattern file1 file2</strong> - search for pattern in <code>file1</code> and <code>file2</code></li>
+<li><strong>grep -rn pattern dir</strong> - search recursively for pattern in dir and show the line number found</li>
+<li><strong>grep -r pattern dir –include=’*.ext</strong> search recursively for pattern in dir and only search in files with <code>.ext</code> extension</li>
+<li><strong>find file</strong> - find all instances of file in real system</li>
+<li><strong>locate file</strong> - find all instances of file</li>
+</ul>
+<h2 id="Process-Management"><a href="#Process-Management" class="headerlink" title="Process Management"></a>Process Management</h2><ul>
+<li><strong>ps</strong> - display your currently active processes</li>
+<li><strong>ps -aux</strong> list </li>
+<li><strong>top</strong> - display all running processes</li>
+<li><strong>kill pid</strong> kill process id <code>pid</code></li>
+<li><strong>kill -9 pid</strong> - force kill process</li>
+<li><strong>killall proc</strong> - kill all processes named <code>proc*</code></li>
+<li><strong>bg</strong> - list stopped or background jobs</li>
+<li><strong>fg n</strong> - brings the most recent job to foreground</li>
+<li><strong>nohup ./run.sh &amp;</strong> - run <code>./run.sh</code> in the background</li>
+</ul>
+<h2 id="Networking"><a href="#Networking" class="headerlink" title="Networking"></a>Networking</h2><ul>
+<li><strong>ping host</strong> - ping host</li>
+<li><strong>whois domain</strong> - get whois information for domain</li>
+<li><strong>dig domain</strong> - get DNS information for domain</li>
+<li><strong>dig -x host</strong> - reverse lookup host</li>
+<li><strong>wget file</strong> - download file</li>
+<li><strong>wget -c file</strong> - continue a stopped download</li>
+<li><strong>curl file</strong> - download file</li>
+<li><strong>lsof -i tcp:1337</strong> - list all processes running on port 1337</li>
+<li><strong>scp user@host:file dir</strong> - secure copy a file from remote server to the dir directory on your machine</li>
+<li><strong>scp file user@host:dir</strong> - secure copy a file from your machine to the dir directory on a remote server</li>
+<li><strong>scp -r user@host:dir dir</strong> - secure copy the directory dir from remote server to the directory dir on your machine</li>
+</ul>
+<h2 id="Shortcuts"><a href="#Shortcuts" class="headerlink" title="Shortcuts"></a>Shortcuts</h2><ul>
+<li><strong>Ctrl+a</strong> - move cursor to beginning of line</li>
+<li><strong>Ctrl+f</strong> - move cursor to end of line</li>
+<li><strong>alt+f</strong> - move cursor forward one word</li>
+<li><strong>alt+b</strong> - move cursor backward one word</li>
+<li><strong>Ctrl+C</strong> - halts the current command</li>
+<li><strong>Ctrl+Z</strong> - stops the current command, resume with <code>fg</code> in the foreground or <code>bg</code> in the background</li>
+<li><strong>Ctrl+W</strong> - erase one word in the current line</li>
+<li><strong>Ctrl+U</strong> - erase the whole line</li>
+<li><strong>Ctrl+R</strong> - type to bring up a recent command</li>
+<li><strong>Ctrl+D</strong> or <strong>exit</strong> - logout of current session</li>
+</ul>
+<h2 id="Permissions"><a href="#Permissions" class="headerlink" title="Permissions"></a>Permissions</h2><ul>
+<li><strong>chmod octal file</strong> - change the permissions of file, which can be updated separately for user, group and all by adding:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4 - read (r)</span><br><span class="line">2 - write (w)</span><br><span class="line">1 - execute (x)</span><br></pre></td></tr></table></figure></li>
+<li><strong>chmod +x file</strong> - add execute permission to file for the current user</li>
+<li><strong>chmod 777</strong> - read, wirte and execute permission for all</li>
+<li><strong>chmod 755</strong> - rwx for owner, rx for group and others</li>
+<li><strong>chmod 700</strong> -rwx for owner, none for group and others</li>
+</ul>
+<h2 id="Compression"><a href="#Compression" class="headerlink" title="Compression"></a>Compression</h2><ul>
+<li><strong>tar cf file.tar files</strong> - create a tar named <code>file.tar</code> containing files</li>
+<li><strong>tar xf file.tar</strong> - extract the files from file.tar</li>
+<li><strong>tar czf file.tar.gz files</strong> - create a tar with Gzip commpression</li>
+<li><strong>tar xzf file.tar.gz</strong> - extract a tar using Gzip</li>
+<li><strong>tar cjf file.tar.gz</strong> - create a tar with Bzip2 compression</li>
+<li><strong>tar xjf file.tar.bz2</strong> - extract a tar using Bzip2</li>
+<li><strong>gzip file</strong> - compress file and remames it to <code>file.gz</code></li>
+<li><strong>gzip -d file.gz</strong> - decompress file.gz back to file</li>
+</ul>
+<h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><ul>
+<li><strong>ssh user@host</strong> - connect to host as user</li>
+<li><strong>ssh user@host -i id_rsa</strong> - connect to host with private key <code>id_rsa</code></li>
+<li><strong>ssh -p port user@host</strong> connect to host on port <code>port</code></li>
+<li><strong>ssh-copy-id user@host</strong> - add your key to host for user to enable password-less login</li>
+</ul>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><ul>
+<li><strong>dpkg -i pkg.deb</strong> - install a package (Debian)</li>
+<li><strong>rpm -Uvh pkg.rpm</strong> - install a package (RPM)</li>
+<li><strong>./configure</strong></li>
+<li><strong>make</strong></li>
+<li><strong>make install</strong></li>
+</ul>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><ul>
+<li><a href="http://cheatsheetworld.com/programming/unix-linux-cheat-sheet/" target="_blank" rel="noopener">http://cheatsheetworld.com/programming/unix-linux-cheat-sheet/</a></li>
+<li><a href="https://files.fosswire.com/2007/08/fwunixref.pdf" target="_blank" rel="noopener">https://files.fosswire.com/2007/08/fwunixref.pdf</a></li>
+<li><a href="https://www.cs.oberlin.edu/~kuperman/help/vim/silly.html" target="_blank" rel="noopener">https://www.cs.oberlin.edu/~kuperman/help/vim/silly.html</a></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+
+        
+
+    </article>
+
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '366c14e3419153f51738',
+        clientSecret: '7b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0',
+        id: window.location.pathname,
+        repo: 'blog-comments',
+        owner: 'qindazhu',
+        admin: 'qindazhu'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+    
+
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Qin Dazhu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+
+    
+    
+    <script src="/js/canvas-nest/canvas-nest-nomobile.min.js" color="0,0,0" opacity="0.5" zIndex="-1" count="80" ></script>
+    
+
+</body>
+</html>

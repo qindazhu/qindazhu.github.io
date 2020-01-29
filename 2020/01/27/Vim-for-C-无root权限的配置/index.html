@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Qin Dazhu">
+
+
+
+
+
+<title>Vim for C++无root权限的配置 | Dazhu&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f2cc6cb138864854619b2aa388016aab";
+    var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Dazhu&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Dazhu&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Vim for C++无root权限的配置</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Qin Dazhu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 27, 2020&nbsp;&nbsp;17:12:06</a>
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    
+                        <span class="post-category">
+                        Category:
+                            
+                                <a href="/categories/Linux%E5%BC%80%E5%8F%91/">Linux开发</a>
+                            
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    <section class="post-tags">
+                        <div>
+                            <span>Tags:</span>
+                            <span class="tag">
+                            
+                                
+                                <a href="/tags/Vim/">Vim</a>
+                                
+                                <a href="/tags/C/">C++</a>
+                                
+                            
+                            </span>
+                        </div>
+
+                    </section>
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>服务器上一般没有root权限，所以很多工具都需要手动安装。建议先看<a href="https://qindazhu.github.io/2020/01/25/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EVim%E7%9A%84C-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" target="_blank" rel="noopener">有root权限的这篇</a>再来看这篇。</p>
+<h2 id="安装vim8"><a href="#安装vim8" class="headerlink" title="安装vim8"></a>安装vim8</h2><ul>
+<li><code>git clone https://github.com/vim/vim.git</code></li>
+<li><code>cd vim</code></li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ .&#x2F;configure --with-features&#x3D;huge \</span><br><span class="line">          --enable-multibyte \</span><br><span class="line">          --enable-rubyinterp&#x3D;yes \</span><br><span class="line">          --enable-pythoninterp&#x3D;yes \</span><br><span class="line">          --enable-python3interp&#x3D;yes \</span><br><span class="line">          --with-python3-config-dir&#x3D;$(python3-config --configdir) \</span><br><span class="line">          --enable-perlinterp&#x3D;yes \</span><br><span class="line">          --enable-luainterp&#x3D;yes \</span><br><span class="line">          --enable-gui&#x3D;gtk2 \</span><br><span class="line">          --enable-cscope \</span><br><span class="line">          --prefix&#x3D;your-local-path&#x2F;vim</span><br></pre></td></tr></table></figure></li>
+<li><code>make VIMRUNTIMEDIR=your-local-path/vim/share/vim/vim82</code></li>
+<li><code>make install</code></li>
+<li><code>you-local-path/vim/bin/vim --version</code>确认已支持python3</li>
+<li>在<code>~/.bash_profile</code>中加一个alias: <code>alias myvim=&#39;your-local-path/vim/bin/vim -u $HOME/.myvimrc</code></li>
+<li><code>source ~/.bash_profile</code></li>
+<li><code>myvim --version</code>确认alias有效。</li>
+<li>参考链接<ul>
+<li><a href="https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source" target="_blank" rel="noopener">https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source</a></li>
+<li><a href="https://stackoverflow.com/questions/9801360/install-multiple-version-of-vim-and-make-each-use-different-vimrc-file-respec" target="_blank" rel="noopener">https://stackoverflow.com/questions/9801360/install-multiple-version-of-vim-and-make-each-use-different-vimrc-file-respec</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="安装Vim-Plug"><a href="#安装Vim-Plug" class="headerlink" title="安装Vim-Plug"></a>安装Vim-Plug</h2><p>无区别，直接下载到autoload文件夹就行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fLo ~&#x2F;.vim&#x2F;autoload&#x2F;plug.vim --create-dirs \</span><br><span class="line">    https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;junegunn&#x2F;vim-plug&#x2F;master&#x2F;plug.vim</span><br></pre></td></tr></table></figure>
+
+<h2 id="提示补全"><a href="#提示补全" class="headerlink" title="提示补全"></a>提示补全</h2><p>基本一样</p>
+<ul>
+<li><code>Plug ‘ycm-core/YouCompleteMe’, { ‘do’: ‘./install.py’ }</code></li>
+<li><code>Plug ‘rdnetto/YCM-Generator’, { ‘branch’: ‘stable’}</code></li>
+<li><code>pip3 install jedi --user</code></li>
+<li><code>git clone --recursive https://github.com/davidhalter/jedi-vim.git ~/.vim/plugged/jedi-vim</code></li>
+<li><code>Plug &#39;davidhalter/jedi-vim&#39;</code></li>
+<li>注意，有时候服务器因为<code>git submodule</code>的问题，启动vim时YCM会报类似<code>no variable &#39;key&#39;</code>的错误，此时<ul>
+<li>去YCM插件目录下运行<code>python3 install.py</code>，此时可能会提醒你<code>git submodule</code>的错误</li>
+<li>运行<code>git submodule update --init --recursive</code>下载没下载全的一些submodule</li>
+<li>再次运行<code>python3 install.py</code></li>
+</ul>
+</li>
+<li>有时候服务器上YCM-Generator因为一些原因无法正常运行，此时可以设置<code>let g:ycm_global_ycm_extra_conf=&#39;~/.ycm_extra_conf.py&#39;</code>直接用自己的设置，可以从<a href="https://github.com/ycm-core/ycmd/blob/master/.ycm_extra_conf.py" target="_blank" rel="noopener">这里</a>下载，然后加入自己的配置</li>
+</ul>
+<h2 id="语法高亮"><a href="#语法高亮" class="headerlink" title="语法高亮"></a>语法高亮</h2><p>无区别，直接安装即可</p>
+<ul>
+<li><code>Plug &#39;sheerun/vim-polyglot&#39;</code></li>
+</ul>
+<h2 id="缩进线"><a href="#缩进线" class="headerlink" title="缩进线"></a>缩进线</h2><p>无区别，直接安装即可</p>
+<ul>
+<li><code>Plug &#39;Yggdroot/indentLine&#39;</code></li>
+</ul>
+<h2 id="状态栏"><a href="#状态栏" class="headerlink" title="状态栏"></a>状态栏</h2><p>无区别</p>
+<ul>
+<li><code>Plug &#39;vim-airline/vim-airline&#39;</code></li>
+<li><code>Plug &#39;vim-airline/vim-airline-themes&#39;</code></li>
+</ul>
+<h2 id="符号索引"><a href="#符号索引" class="headerlink" title="符号索引"></a>符号索引</h2><ul>
+<li>安装universal-ctags,祈祷依赖软件你服务器上都有，要不然每个都要手动转就麻烦了，还不如试着去安装<ul>
+<li>git clone <a href="https://github.com/universal-ctags/ctags.git" target="_blank" rel="noopener">https://github.com/universal-ctags/ctags.git</a></li>
+<li>安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ .&#x2F;autogen.sh</span><br><span class="line">$ .&#x2F;configure --prefix&#x3D;&#x2F;where&#x2F;you&#x2F;want # defaults to &#x2F;usr&#x2F;local</span><br><span class="line">$ make</span><br><span class="line">$ make install # may require extra privileges depending on where to install</span><br></pre></td></tr></table></figure></li>
+<li>在<code>~/.bash_profile</code>中加入环境变量并source</li>
+</ul>
+</li>
+<li>安装vim-gutentags<ul>
+<li><code>Plug &#39;ludovicchabant/vim-gutentags&#39;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="语法检查"><a href="#语法检查" class="headerlink" title="语法检查"></a>语法检查</h2><ul>
+<li>安装cppcheck<ul>
+<li><code>git clone https://github.com/danmar/cppcheck.git</code></li>
+<li><code>cd cppcheck</code></li>
+<li><code>make MATCHCOMPILER=yes FILESDIR=your-local-path/cppcheck CXXFLAGS=&quot;-O2 -DNDEBUG -Wall -Wno-sign-compare -Wno-unused-function&quot;</code></li>
+<li>上面指定的<code>FILESDIR</code>好像没用，还是在当前make目录下生成<code>cppcheck</code>文件，<code>./cppcheck --version</code>验证安装, <code>cp cppcheck -r your-local-path/cppcheck</code>拷贝整个目录到自己的目录，记得是整个，因为还有std.cfg等文件。</li>
+<li>在<code>~/.bash_profile</code>中加入环境变量指定cppcheck路径</li>
+<li><code>source ~/.bash_profile</code></li>
+<li>随便写个错误的c++语法验证</li>
+</ul>
+</li>
+<li>安装pylint<ul>
+<li><code>pip3 install pylint --user</code></li>
+</ul>
+</li>
+<li>安装ALE<ul>
+<li><code>Plug &#39;dense-analysis/ale&#39;</code></li>
+<li>配置中加入一句<code>let g:airline#extensions#ale#enabled = 1</code>让airline来处理ALE的状态栏</li>
+</ul>
+</li>
+</ul>
+<h2 id="搜索文件"><a href="#搜索文件" class="headerlink" title="搜索文件"></a>搜索文件</h2><p>无区别，直接安装即可<code>Plug &#39;wsdjeg/FlyGrep.vim&#39;</code></p>
+<p>也可以用<a href="https://github.com/junegunn/fzf.vim" target="_blank" rel="noopener">fzf</a></p>
+<ul>
+<li><code>Plug &#39;junegunn/fzf&#39;, { &#39;dir&#39;: &#39;~/.fzf&#39;, &#39;do&#39;: &#39;./install --all&#39; }</code></li>
+<li><code>Plug &#39;junegunn/fzf.vim&#39;</code></li>
+</ul>
+<h2 id="源文件头文件切换"><a href="#源文件头文件切换" class="headerlink" title="源文件头文件切换"></a>源文件头文件切换</h2><p>无区别， 直接安装<code>Plug &#39;tpope/vim-projectionist&#39;</code></p>
+<h2 id="函数列表"><a href="#函数列表" class="headerlink" title="函数列表"></a>函数列表</h2><ul>
+<li><code>Plug &#39;Yggdroot/LeaderF&#39;, { &#39;do&#39;: &#39;./install.sh&#39; }</code> </li>
+<li>注意LeaderfFunction需要ctags，所以要先安装ctags</li>
+</ul>
+<h2 id="折叠"><a href="#折叠" class="headerlink" title="折叠"></a>折叠</h2><p>无区别， 直接安装<code>Plug &#39;tmhedberg/SimpylFold&#39;</code></p>
+<h2 id="文件比较"><a href="#文件比较" class="headerlink" title="文件比较"></a>文件比较</h2><p>无区别， 直接安装<code>Plug &#39;mhinz/vim-signify&#39;</code></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>无区别，直接安装<code>Plug &#39;tpope/vim-vinegar&#39;</code></p>
+<h2 id="AsyncRun"><a href="#AsyncRun" class="headerlink" title="AsyncRun"></a><a href="https://github.com/skywind3000/asyncrun.vim" target="_blank" rel="noopener">AsyncRun</a></h2><ul>
+<li><code>Plug &#39;skywind3000/asyncrun.vim&#39;</code></li>
+<li><code>:AsyncRun make</code></li>
+<li><code>:AsyncRun! grep -R &lt;cword&gt; .</code> 感叹号表示不打开quickfix窗口, <cword>表示当前cursor下的单词</li>
+<li>:AsyncStop[!] 包含感叹号会signal KILL</li>
+</ul>
+<h2 id="快捷键映射"><a href="#快捷键映射" class="headerlink" title="快捷键映射"></a>快捷键映射</h2><p>有时候，服务器上的快捷键映射会被其他软件劫持，比如tmux，你也没有权限改。此时你只能去选择一些没被劫持的键，或者你每次vim启动后重新映射<code>:so myvimrc</code>（我的机器上可以）。设置autocmd在我的机器上没用。可以定制一个大概率不会被劫持的快捷键做source，比如<code>nnoremap bsv :source $MYVIMRC</code></p>
+<ul>
+<li>参考链接<ul>
+<li><a href="https://vi.stackexchange.com/questions/7722/how-to-debug-a-mapping" target="_blank" rel="noopener">https://vi.stackexchange.com/questions/7722/how-to-debug-a-mapping</a></li>
+<li><a href="https://vi.stackexchange.com/questions/8075/inoremap-only-works-after-source" target="_blank" rel="noopener">https://vi.stackexchange.com/questions/8075/inoremap-only-works-after-source</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+
+        
+
+    </article>
+
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '366c14e3419153f51738',
+        clientSecret: '7b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0',
+        id: window.location.pathname,
+        repo: 'blog-comments',
+        owner: 'qindazhu',
+        admin: 'qindazhu'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+    
+
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Qin Dazhu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+
+    
+    
+    <script src="/js/canvas-nest/canvas-nest-nomobile.min.js" color="0,0,0" opacity="0.5" zIndex="-1" count="80" ></script>
+    
+
+</body>
+</html>

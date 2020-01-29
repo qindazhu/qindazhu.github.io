@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Qin Dazhu">
+
+
+
+
+
+<title>Vim Cheet Sheet | Dazhu&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f2cc6cb138864854619b2aa388016aab";
+    var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Dazhu&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Dazhu&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Vim Cheet Sheet</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Qin Dazhu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 24, 2020&nbsp;&nbsp;12:34:45</a>
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    
+                        <span class="post-category">
+                        Category:
+                            
+                                <a href="/categories/Cheet-Sheet/">Cheet Sheet</a>
+                            
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    <section class="post-tags">
+                        <div>
+                            <span>Tags:</span>
+                            <span class="tag">
+                            
+                                
+                                <a href="/tags/Vim/">Vim</a>
+                                
+                                <a href="/tags/Cheet-Sheet/">Cheet Sheet</a>
+                                
+                            
+                            </span>
+                        </div>
+
+                    </section>
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h2><ul>
+<li><strong>:help keyword</strong> - open help for keyword</li>
+<li><strong>:saveas file</strong> - save file as</li>
+<li><strong>:close</strong> - close current pane</li>
+</ul>
+<h2 id="Cursor-movement"><a href="#Cursor-movement" class="headerlink" title="Cursor movement"></a>Cursor movement</h2><ul>
+<li><strong>h</strong> - move cursor left</li>
+<li><strong>j</strong> - move cursor down</li>
+<li><strong>k</strong> - move cursor up</li>
+<li><strong>l</strong> - move cursor right</li>
+<li><strong>H</strong> - move to top of screen</li>
+<li><strong>M</strong> - move to middle of screen</li>
+<li><strong>L</strong> - move to bottom of screen</li>
+<li><strong>w</strong> - jump forwards to the start of a word</li>
+<li><strong>W</strong> - jump forwards to the start of a word (words can contain punctuation)</li>
+<li><strong>e</strong> - jump forwards to the end of a word</li>
+<li><strong>E</strong> - jump forwards to the end of a word (words can contain punctuation)</li>
+<li><strong>b</strong> - jump backwards to the start of a word</li>
+<li><strong>B</strong> - jump backwards to the start of a word (words can contain punctuation)</li>
+<li><strong>%</strong> - move to matching character (default supported pairs: ‘()’, ‘{}’, ‘[]’ - use <code>:h matchpairs</code> in vim for more info)</li>
+<li><strong>0</strong> - jump to the start of the line</li>
+<li><strong>^</strong> - jump to the first non-blank character of the line</li>
+<li><strong>$</strong> - jump to the end of the line</li>
+<li><strong>g_</strong> - jump to the last non-blank character of the line</li>
+<li><strong>gg</strong> - go to the first line of the document</li>
+<li><strong>G</strong> - go to the last line of the document</li>
+<li><strong>5G</strong> - go to line 5</li>
+<li><strong>fx</strong> - jump to next occurrence of character x</li>
+<li><strong>tx</strong> - jump to before next occurrence of character x</li>
+<li><strong>Fx</strong> - jump to previous occurence of character x</li>
+<li><strong>Tx</strong> - jump to after previous occurence of character x</li>
+<li><strong>;</strong> - repeat previous f, t, F or T movement</li>
+<li><strong>,</strong> - repeat previous f, t, F or T movement, backwards</li>
+<li><strong>}</strong> - jump to next paragraph (or function/block, when editing code)</li>
+<li><strong>{</strong> - jump to previous paragraph (or function/block, when editing code)</li>
+<li><strong>)</strong> - jump to next sentence</li>
+<li><strong>(</strong> - jump to previous sentence</li>
+<li><strong>zz</strong> - center cursor on screen</li>
+<li><strong>Ctrl + e</strong> - move screen down one line (without moving cursor)</li>
+<li><strong>Ctrl + y</strong> - move screen up one line (without moving cursor)</li>
+<li><strong>Ctrl + b</strong> - move back one full screen</li>
+<li><strong>Ctrl + f</strong> - move forward one full screen</li>
+<li><strong>Ctrl + d</strong> - move forward 1/2 a screen</li>
+<li><strong>Ctrl + u</strong> - move back 1/2 a screen</li>
+</ul>
+<h2 id="Insert-mode"><a href="#Insert-mode" class="headerlink" title="Insert mode"></a>Insert mode</h2><ul>
+<li><strong>i</strong> - insert before the cursor</li>
+<li><strong>I</strong> - insert at the beginning of the line</li>
+<li><strong>a</strong> - insert (append) after the cursor</li>
+<li><strong>A</strong> - insert (append) at the end of the line</li>
+<li><strong>o</strong> - append (open) a new line below the current line</li>
+<li><strong>O</strong> - append (open) a new line above the current line</li>
+<li><strong>ea</strong> - insert (append) at the end of the word</li>
+<li><strong>gi</strong> - enter the previous position in insert mode</li>
+<li><strong>Esc</strong> or <strong>Ctrl+[</strong> - exit insert mode</li>
+</ul>
+<h2 id="Working-with-multiple-files"><a href="#Working-with-multiple-files" class="headerlink" title="Working with multiple files"></a>Working with multiple files</h2><ul>
+<li><strong>:e file</strong> - edit a file in a new buffer</li>
+<li><strong>:bnext</strong> or <strong>:bn</strong> - go to the next buffer</li>
+<li><strong>:bprev</strong> or <strong>:bp</strong> - go to the previous buffer</li>
+<li><strong>:bd</strong> - delete a buffer (close a file)</li>
+<li><strong>:ls</strong> - list all open buffers</li>
+<li><strong>:sp file</strong> - open a file in a new buffer and split window</li>
+<li><strong>:vsp file</strong> - open a file in a new buffer and vertically split window</li>
+<li><strong>Ctrl + ws</strong> - split window</li>
+<li><strong>Ctrl + ww</strong> - switch windows</li>
+<li><strong>Ctrl + wq</strong> - quit a window</li>
+<li><strong>Ctrl + wv</strong> - split window vertically</li>
+<li><strong>Ctrl + wh</strong> - move cursor to the left window (vertical split)</li>
+<li><strong>Ctrl + wl</strong> - move cursor to the right window (vertical split)</li>
+<li><strong>Ctrl + wj</strong> - move cursor to the window below (horizontal split)</li>
+<li><strong>Ctrl + wk</strong> - move cursor to the window above (horizontal split)</li>
+</ul>
+<h2 id="Editing"><a href="#Editing" class="headerlink" title="Editing"></a>Editing</h2><ul>
+<li><strong>r</strong> - replace a single character</li>
+<li><strong>J</strong> - join line below to the current one with one space in between</li>
+<li><strong>gJ</strong> - join line below to the current one without space in between</li>
+<li><strong>gwip</strong> - reflow paragraph</li>
+<li><strong>cc</strong> - change (replace) entire line</li>
+<li><strong>C</strong> - change (replace) to the end of the line</li>
+<li><strong>c$</strong> - change (replace) to the end of the line</li>
+<li><strong>ciw</strong> - change (replace) entire word</li>
+<li><strong>cw</strong> - change (replace) to the end of the word</li>
+<li><strong>s</strong> - delete character and substitute text</li>
+<li><strong>S</strong> - delete line and substitute text (same as cc)</li>
+<li><strong>xp</strong> - transpose two letters (delete and paste)</li>
+<li><strong>u</strong> - undo</li>
+<li><strong>Ctrl + r</strong> - redo</li>
+<li><strong>.</strong> - repeat last command</li>
+</ul>
+<h2 id="Marking-text-visual-mode"><a href="#Marking-text-visual-mode" class="headerlink" title="Marking text (visual mode)"></a>Marking text (visual mode)</h2><ul>
+<li><strong>v</strong> - start visual mode, mark lines, then do a command (like y-yank)</li>
+<li><strong>V</strong> - start linewise visual mode</li>
+<li><strong>o</strong> - move to other end of marked area</li>
+<li><strong>Ctrl + v</strong> - start visual block mode</li>
+<li><strong>O</strong> - move to other corner of block</li>
+<li><strong>aw</strong> - mark a word</li>
+<li><strong>ab</strong> - a block with ()</li>
+<li><strong>aB</strong> - a block with {}</li>
+<li><strong>ib</strong> - inner block with ()</li>
+<li><strong>iB</strong> - inner block with {}</li>
+<li><strong>Esc</strong> - exit visual mode</li>
+</ul>
+<h3 id="Visual-commands"><a href="#Visual-commands" class="headerlink" title="Visual commands"></a>Visual commands</h3><ul>
+<li><strong>&gt;</strong> - shift text right</li>
+<li><strong>&lt;</strong> - shift text left</li>
+<li><strong>y</strong> - yank (copy) marked text</li>
+<li><strong>d</strong> - delete marked text</li>
+<li><strong>~</strong> - switch case</li>
+</ul>
+<h2 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h2><ul>
+<li><strong>:reg</strong> - show registers content</li>
+<li><strong>“xy</strong> - yank into register x</li>
+<li><strong>“xp</strong> - paste contents of register x<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Registers are being stored in ~&#x2F;.viminfo, and will be loaded again on next restart of vim.</span><br><span class="line">Register 0 contains always the value of the last yank command.</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Marks"><a href="#Marks" class="headerlink" title="Marks"></a>Marks</h2><ul>
+<li><strong>:marks</strong> - list of marks</li>
+<li><strong>ma</strong> - set current position for mark A</li>
+<li><strong>`a</strong> - jump to position of mark A</li>
+<li><strong>y`a</strong> - yank text to position of mark A</li>
+</ul>
+<h2 id="Macros"><a href="#Macros" class="headerlink" title="Macros"></a>Macros</h2><ul>
+<li><strong>qa</strong> - record macro a</li>
+<li><strong>q</strong> - stop recording macro</li>
+<li><strong>@a</strong> - run macro a</li>
+<li><strong>@@</strong> - rerun last run macro</li>
+</ul>
+<h2 id="Tabs"><a href="#Tabs" class="headerlink" title="Tabs"></a>Tabs</h2><ul>
+<li><strong>:tabnew</strong> or <strong>:tabnew {page.words.file}</strong> - open a file in a new tab</li>
+<li><strong>Ctrl + wT</strong> - move the current split window into its own tab</li>
+<li><strong>gt</strong> or <strong>:tabnext</strong> or <strong>:tabn</strong> - move to the next tab</li>
+<li><strong>gT</strong> or <strong>:tabprev</strong> or <strong>:tabp</strong> - move to the previous tab</li>
+<li><strong>#gt</strong> - move to tab number #</li>
+<li><strong>:tabmove#</strong>  - move current tab to the #th position (indexed from 0)</li>
+<li><strong>:tabclose</strong> or <strong>:tabc</strong> - close the current tab and all its windows</li>
+<li><strong>:tabonly</strong> or <strong>:tabo</strong> - close all tabs except for the current one</li>
+<li><strong>:tabdo</strong> command - run the command on all tabs (e.g. :tabdo q - closes all opened tabs)</li>
+</ul>
+<h2 id="Cut-and-paste"><a href="#Cut-and-paste" class="headerlink" title="Cut and paste"></a>Cut and paste</h2><ul>
+<li><strong>yy</strong> - yank (copy) a line</li>
+<li><strong>2yy</strong> - yank (copy) 2 lines</li>
+<li><strong>yw</strong> - yank (copy) the characters of the word from the cursor position to the start of the next word</li>
+<li><strong>y$</strong> - yank (copy) to end of line</li>
+<li><strong>p</strong> - put (paste) the clipboard after cursor</li>
+<li><strong>P</strong> - put (paste) before cursor</li>
+<li><strong>dd</strong> - delete (cut) a line</li>
+<li><strong>2dd</strong> - delete (cut) 2 lines</li>
+<li><strong>dw</strong> - delete (cut) the characters of the word from the cursor position to the start of the next word</li>
+<li><strong>D</strong> - delete (cut) to the end of the line</li>
+<li><strong>d$</strong> - delete (cut) to the end of the line</li>
+<li><strong>x</strong> - delete (cut) character</li>
+</ul>
+<h2 id="Exiting"><a href="#Exiting" class="headerlink" title="Exiting"></a>Exiting</h2><ul>
+<li><strong>:w</strong> - write (save) the file, but don’t exit</li>
+<li><strong>:w !sudo tee %</strong> - write out the current file using sudo</li>
+<li><strong>:wq</strong> or <strong>:x</strong> or <strong>ZZ</strong> - write (save) and quit</li>
+<li><strong>:q</strong> - quit (fails if there are unsaved changes)</li>
+<li><strong>:q!</strong> or <strong>ZQ</strong> - quit and throw away unsaved changes</li>
+<li><strong>:wqa</strong> - write (save) and quit on all tabs</li>
+</ul>
+<h2 id="Search-and-replace"><a href="#Search-and-replace" class="headerlink" title="Search and replace"></a>Search and replace</h2><ul>
+<li><strong>/pattern</strong> - search for pattern</li>
+<li><strong>?pattern</strong> - search backward for pattern</li>
+<li><strong>\vpattern</strong> - ‘very magic’ pattern: non-alphanumeric characters are interpreted as special regex symbols (no escaping needed)</li>
+<li><strong>n</strong> - repeat search in same direction</li>
+<li><strong>N</strong> - repeat search in opposite direction</li>
+<li><strong>:%s/old/new/g</strong> - replace all old with new throughout file</li>
+<li><strong>:%s/old/new/gc</strong> - replace all old with new throughout file with confirmations</li>
+<li><strong>:noh</strong> - remove highlighting of search matches</li>
+</ul>
+<h3 id="Search-in-multiple-files"><a href="#Search-in-multiple-files" class="headerlink" title="Search in multiple files"></a>Search in multiple files</h3><p>-<strong>:vimgrep /pattern/  file</strong> - search for pattern in multiple files</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e.g. :vimgrep &#x2F;foo&#x2F; **&#x2F;*</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>:cn</strong> - jump to the next match</li>
+<li><strong>:cp</strong> - jump to the previous match</li>
+<li><strong>:copen</strong> - open a window containing the list of matches</li>
+</ul>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><ul>
+<li><a href="https://vim.rtorr.com" target="_blank" rel="noopener">https://vim.rtorr.com</a></li>
+<li><a href="https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt" target="_blank" rel="noopener">https://github.com/skywind3000/awesome-cheatsheets/blob/master/editors/vim.txt</a></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+
+        
+
+    </article>
+
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '366c14e3419153f51738',
+        clientSecret: '7b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0',
+        id: window.location.pathname,
+        repo: 'blog-comments',
+        owner: 'qindazhu',
+        admin: 'qindazhu'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+    
+
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Qin Dazhu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+
+    
+    
+    <script src="/js/canvas-nest/canvas-nest-nomobile.min.js" color="0,0,0" opacity="0.5" zIndex="-1" count="80" ></script>
+    
+
+</body>
+</html>

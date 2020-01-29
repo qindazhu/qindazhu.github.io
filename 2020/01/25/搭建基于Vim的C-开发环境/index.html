@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Qin Dazhu">
+
+
+
+
+
+<title>搭建基于Vim的C++开发环境 | Dazhu&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f2cc6cb138864854619b2aa388016aab";
+    var s = document.getElementsByTagName("script")[0]; 
+         s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Dazhu&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Dazhu&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">搭建基于Vim的C++开发环境</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Qin Dazhu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 25, 2020&nbsp;&nbsp;18:24:56</a>
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    
+                        <span class="post-category">
+                        Category:
+                            
+                                <a href="/categories/Linux%E5%BC%80%E5%8F%91/">Linux开发</a>
+                            
+                        </span>
+                    
+                </div>
+                <div class="post-meta">
+                    <section class="post-tags">
+                        <div>
+                            <span>Tags:</span>
+                            <span class="tag">
+                            
+                                
+                                <a href="/tags/Vim/">Vim</a>
+                                
+                                <a href="/tags/C/">C++</a>
+                                
+                            
+                            </span>
+                        </div>
+
+                    </section>
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>所需功能： 提示补全，定义跳转，关键词搜索，语法高亮，语法检查，缩进折叠，函数展示大纲，文件模板，目录树等等</p>
+<h2 id="安装Vim-8-0"><a href="#安装Vim-8-0" class="headerlink" title="安装Vim 8.0"></a>安装Vim 8.0</h2><ul>
+<li>如果有root权限，直接安装</li>
+<li>如果没有root权限，可以从源码安装<a href="https://www.vim.org/git.php" target="_blank" rel="noopener">https://www.vim.org/git.php</a></li>
+<li><a href="https://xmfbit.github.io/2018/10/02/vim-you-complete-me/" target="_blank" rel="noopener">https://xmfbit.github.io/2018/10/02/vim-you-complete-me/</a></li>
+</ul>
+<h2 id="安装Vim-Plug"><a href="#安装Vim-Plug" class="headerlink" title="安装Vim-Plug"></a>安装<a href="https://github.com/junegunn/vim-plug" target="_blank" rel="noopener">Vim-Plug</a></h2><p>vim-plug支持异步安装和按需加载，建议不要再使用[Vundle]。(<a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="noopener">https://github.com/VundleVim/Vundle.vim</a>)</p>
+<p>下载<code>plug.vim</code>放到<code>autoload</code>文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fLo ~&#x2F;.vim&#x2F;autoload&#x2F;plug.vim --create-dirs \</span><br><span class="line">    https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;junegunn&#x2F;vim-plug&#x2F;master&#x2F;plug.vim</span><br></pre></td></tr></table></figure>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>在<code>~/.vimrc</code>里配置安装哪些插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot; Plugins will be downloaded under the specified directory.</span><br><span class="line">call plug#begin(&#39;~&#x2F;.vim&#x2F;plugged&#39;)</span><br><span class="line"></span><br><span class="line">&quot; Declare the list of plugins.</span><br><span class="line">Plug &#39;tpope&#x2F;vim-sensible&#39;</span><br><span class="line">Plug &#39;junegunn&#x2F;seoul256.vim&#39;</span><br><span class="line"></span><br><span class="line">&quot; List ends here. Plugins become visible to Vim after this call.</span><br><span class="line">call plug#end()</span><br></pre></td></tr></table></figure>
+<p>然后重启vim，运行<code>:PlugInstall</code>安装声明的插件，<code>:PlugStatus</code>查看安装进度。<br><code>:PlugUpdate</code>更新插件，<code>:PlugDiff</code>跟上一个版本比较，卸载插件的时候，在<code>~/.vimrc</code>里删除声明，然后重启vim后运行<code>:PlugClean</code>卸载。<br>具体参考<a href="https://github.com/junegunn/vim-plug/wiki/tutorial" target="_blank" rel="noopener">这里</a></p>
+<h3 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot; 第一次执行 NERDTreeToggle 命令时，NERD tree 插件才加载</span><br><span class="line">Plug &#39;scrooloose&#x2F;nerdtree&#39;, &#123; &#39;on&#39;: &#39;NERDTreeToggle&#39; &#125;</span><br><span class="line">&quot; 打开 clojure 类型的文件时，vim-fireplace&#39; 才开始加载</span><br><span class="line">Plug &#39;tpope&#x2F;vim-fireplace&#39;, &#123; &#39;for&#39;: &#39;clojure&#39; &#125;</span><br><span class="line">&quot; 同on一样，for 支持多文件类型</span><br><span class="line">Plug &#39;kovisoft&#x2F;paredit&#39;, &#123; &#39;for&#39;: [&#39;clojure&#39;, &#39;scheme&#39;] &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="一些Tips"><a href="#一些Tips" class="headerlink" title="一些Tips"></a>一些Tips</h3><p>比如条件激活等，具体参考<a href="https://github.com/junegunn/vim-plug/wiki/tips" target="_blank" rel="noopener">这里</a></p>
+<h2 id="提示补全"><a href="#提示补全" class="headerlink" title="提示补全"></a>提示补全</h2><p>这里只安装针对C family和Python的补全支持。</p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><ul>
+<li><a href="https://github.com/ycm-core/YouCompleteMe" target="_blank" rel="noopener">YouCompleteMe</a></li>
+<li><a href="https://github.com/rdnetto/YCM-Generator" target="_blank" rel="noopener">YCM-Generator</a>： 用来解决YouCompleteMe配置文件生成比较麻烦的问题。</li>
+<li><a href="https://github.com/davidhalter/jedi-vim" target="_blank" rel="noopener">jedi-vim</a>：不一定需要安装，最新版本YCM已经支持python的补全。</li>
+<li>vim omnicomplete: vim自带，作为YCM的补充。可以用<code>:help ins-completion</code>查看。</li>
+</ul>
+<p>记得确认 Python3, Clang, CMake已经安装，<code>vim --version</code>确认vim版本支持python3(输出列表里python3前有<code>+</code>号)。</p>
+<h3 id="安装并配置YouCompleteMe和YCM-Generator"><a href="#安装并配置YouCompleteMe和YCM-Generator" class="headerlink" title="安装并配置YouCompleteMe和YCM-Generator"></a>安装并配置YouCompleteMe和YCM-Generator</h3><p>后在<code>~/.vimrc</code>中<code>vim-plug</code>中的插件列表中加入以下行：</p>
+<ul>
+<li>Plug ‘ycm-core/YouCompleteMe’, { ‘do’: ‘./install.py’ }</li>
+<li>Plug ‘rdnetto/YCM-Generator’, { ‘branch’: ‘stable’}</li>
+<li>运行<code>:PlugInstall</code>安装</li>
+<li>在<code>/.vimrc</code>中配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&quot; YCM-Generator 插件配置</span><br><span class="line">&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&quot; ctrl-I 自动生成 .ycm_extra_conf.py 文件</span><br><span class="line">noremap &lt;C-I&gt; :YcmGenerateConfig -c g++ -v -x c++ -f -b make .&lt;CR&gt;</span><br></pre></td></tr></table></figure>
+以后只要在项目根目录打开后执行快捷键 Ctrl - i 后就会自动在当前目录生成配置文件</li>
+<li>参考<a href="https://zhuanlan.zhihu.com/p/33046090" target="_blank" rel="noopener">这里</a>配置YCM<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let g:ycm_add_preview_to_completeopt &#x3D; 0</span><br><span class="line">let g:ycm_show_diagnostics_ui &#x3D; 0</span><br><span class="line">let g:ycm_server_log_level &#x3D; &#39;info&#39;</span><br><span class="line">let g:ycm_min_num_identifier_candidate_chars &#x3D; 2</span><br><span class="line">let g:ycm_collect_identifiers_from_comments_and_strings &#x3D; 1</span><br><span class="line">let g:ycm_complete_in_strings&#x3D;1</span><br><span class="line">let g:ycm_key_invoke_completion &#x3D; &#39;&lt;c-z&gt;&#39;</span><br><span class="line">set completeopt&#x3D;menu,menuone</span><br><span class="line"></span><br><span class="line">noremap &lt;c-z&gt; &lt;NOP&gt;</span><br><span class="line">         </span><br></pre></td></tr></table></figure></li>
+<li>注意，如果遇到<code>ycmd server shut down</code>的错误，一般重新运行下YCM下的<code>install.py</code>就行。</li>
+<li>如果遇到<code>python3 missing file header</code>的问题，<code>sudo apt-get install python3-dev</code>安装<code>python3-dev</code>就行。</li>
+</ul>
+<h3 id="安装并配置jedi-vim"><a href="#安装并配置jedi-vim" class="headerlink" title="安装并配置jedi-vim"></a>安装并配置jedi-vim</h3><ul>
+<li><code>pip3 install jedi</code></li>
+<li><code>git clone --recursive https://github.com/davidhalter/jedi-vim.git ~/.vim/plugged/jedi-vim</code></li>
+<li>在<code>~/.vimrc</code>里添加<code>Plug &#39;davidhalter/jedi-vim&#39;</code></li>
+</ul>
+<h3 id="相关快捷键"><a href="#相关快捷键" class="headerlink" title="相关快捷键"></a>相关快捷键</h3><ul>
+<li><strong>omnicomplete</strong><ul>
+<li>Ctrl-X Ctrl-L：整行补全</li>
+<li>Ctrl-X Ctrl-N：当前文件内关键字补全</li>
+<li>Ctrl-X Ctrl-i：当前文件及其头文件内的关键字</li>
+<li>Ctrl-X Ctrl-]：tags补全</li>
+<li>Ctrl-X Ctrl-F：文件名补全</li>
+<li>Ctrl-X Ctrl-O：全能 (omni) 补全</li>
+</ul>
+</li>
+<li><strong>jedi-vim</strong><ul>
+<li>leader (默认是<code>\</code>键) + d：定义跳转，包括语句和 import 模块</li>
+<li>leader + n：查看用法</li>
+<li>leader + r：重命名</li>
+<li>:Pyimport os：打开模块 os</li>
+<li>Ctrl + space：补全</li>
+</ul>
+</li>
+</ul>
+<h2 id="语法高亮"><a href="#语法高亮" class="headerlink" title="语法高亮"></a>语法高亮</h2><p>安装<a href="https://github.com/sheerun/vim-polyglot" target="_blank" rel="noopener">vim-polyglot</a>并打开vim的syntax的功能即可</p>
+<ul>
+<li><code>~/.vimrc</code>中加入<code>Plug &#39;sheerun/vim-polyglot&#39;</code></li>
+<li><code>~/.vimrc</code>中加入<code>syntax on</code></li>
+</ul>
+<h2 id="缩进线"><a href="#缩进线" class="headerlink" title="缩进线"></a>缩进线</h2><ul>
+<li>安装<a href="https://github.com/Yggdroot/indentLine" target="_blank" rel="noopener">indentLine</a>并配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Plug &#39;Yggdroot&#x2F;indentLine&#39;</span><br><span class="line">&quot;打开缩进线</span><br><span class="line">let g:indentLine_enabled &#x3D; 1</span><br><span class="line">let g:indentLine_char&#x3D;&#39;¦&#39;</span><br></pre></td></tr></table></figure></li>
+<li>设置tab转化为4个空格<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;将输入的TAB自动展开成空格。开启后要输入TAB，需要Ctrl-V&lt;TAB&gt;</span><br><span class="line">set expandtab</span><br><span class="line">&quot;使用每层缩进的空格数</span><br><span class="line">set shiftwidth&#x3D;4</span><br><span class="line">&quot;编辑时一个TAB字符占多少个空格的位置</span><br><span class="line">set tabstop&#x3D;4</span><br><span class="line">&quot;方便在开启了et后使用退格（backspace）键，每次退格将删除X个空格</span><br><span class="line">set softtabstop&#x3D;4</span><br><span class="line">&quot; 使回格键（backspace）正常处理indent(缩进位置), eol(行结束符), start(段首), 很奇怪 Vim 默认竟然不允许在这些地方使用 backspace</span><br><span class="line">set backspace&#x3D;indent,eol,start</span><br><span class="line">&quot;开启时，在行首按TAB将加入 shiftwidth 个空格，否则加入 tabstop 个空格</span><br><span class="line">set smarttab</span><br></pre></td></tr></table></figure></li>
+<li><code>:IndentLinesToggle</code>打开缩进</li>
+</ul>
+<h2 id="语法检查"><a href="#语法检查" class="headerlink" title="语法检查"></a>语法检查</h2><ul>
+<li>安装<a href="https://github.com/dense-analysis/ale" target="_blank" rel="noopener">ALE</a> <code>Plug &#39;dense-analysis/ale&#39;</code></li>
+<li>安装cppcheck和pylint<br><code>sudo apt install cppcheck pylint</code></li>
+<li>配置ALE<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let g:ale_echo_msg_format &#x3D; &#39;[%linter%] %code: %%s&#39;</span><br><span class="line">let g:ale_linters &#x3D; &#123;</span><br><span class="line">    ¦   ¦   \ &#39;cpp&#39;: [&#39;cppcheck&#39;],</span><br><span class="line">    ¦   ¦   \ &#39;c&#39;: [&#39;cppcheck&#39;],</span><br><span class="line">    ¦   ¦   \ &#39;python&#39;: [&#39;pylint&#39;],</span><br><span class="line">    ¦   ¦   \&#125;</span><br><span class="line">&quot; normal 模式下文字改变运行 linter</span><br><span class="line">let g:ale_lint_on_text_changed &#x3D; &#39;normal&#39;</span><br><span class="line">&quot; 离开 insert 模式的时候运行 linter</span><br><span class="line">let g:ale_lint_on_insert_leave &#x3D; 1</span><br><span class="line">let g:ale_c_cppcheck_options &#x3D; &#39;--enable&#x3D;all&#39;</span><br><span class="line">let g:ale_cpp_cppcheck_options &#x3D; &#39;--enable&#x3D;all&#39;</span><br><span class="line">let g:ale_c_gcc_options &#x3D; &#39;-Wall -O2 -std&#x3D;c99&#39;</span><br><span class="line">let g:ale_cpp_gcc_options &#x3D; &#39;-Wall -O2 -std&#x3D;c++11&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="搜索文件"><a href="#搜索文件" class="headerlink" title="搜索文件"></a>搜索文件</h2></li>
+<li>安装<a href="https://github.com/wsdjeg/FlyGrep.vim" target="_blank" rel="noopener">FlyGrep</a> <code>Plug &#39;wsdjeg/FlyGrep.vim&#39;</code></li>
+<li>映射查找快捷键为Ctrl-F <code>nnoremap &lt;C-F&gt; :FlyGrep&lt;CR&gt;</code></li>
+<li>快捷键<ul>
+<li>Ctrl+F 查找</li>
+<li>Esc 退出搜索</li>
+<li>Enter 进入选中的搜索结果</li>
+<li>Tab 下一个搜索结果</li>
+<li>Shift+Tab 上一个搜索结果</li>
+</ul>
+</li>
+<li>注意，默认FlyGrep只能搜索当前目录，如果要搜索整个project，需要切换到根目录。</li>
+</ul>
+<h2 id="源文件头文件切换"><a href="#源文件头文件切换" class="headerlink" title="源文件头文件切换"></a>源文件头文件切换</h2><ul>
+<li>安装<a href="https://github.com/tpope/vim-projectionist" target="_blank" rel="noopener">vim-projectionist</a> <code>Plug &#39;tpope/vim-projectionist&#39;</code></li>
+<li>用法: TODO</li>
+</ul>
+<h2 id="符号索引"><a href="#符号索引" class="headerlink" title="符号索引"></a>符号索引</h2><p>python使用jedi-vim的快捷键即可，c++使用ctags.</p>
+<h3 id="安装ctags"><a href="#安装ctags" class="headerlink" title="安装ctags"></a>安装<a href="https://github.com/universal-ctags/ctags" target="_blank" rel="noopener">ctags</a></h3><ul>
+<li><code>git clone https://github.com/universal-ctags/ctags.git</code>，也可以用这个<a href="http://ctags.sourceforge.net/" target="_blank" rel="noopener">exuberant ctags</a>安装。</li>
+<li>安装依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install \</span><br><span class="line">    gcc make \</span><br><span class="line">    pkg-config autoconf automake \</span><br><span class="line">    python3-docutils \</span><br><span class="line">    libseccomp-dev \</span><br><span class="line">    libjansson-dev \</span><br><span class="line">    libyaml-dev \</span><br><span class="line">    libxml2-dev</span><br></pre></td></tr></table></figure></li>
+<li>安装ctags<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ .&#x2F;autogen.sh</span><br><span class="line">$ .&#x2F;configure --prefix&#x3D;&#x2F;where&#x2F;you&#x2F;want # defaults to &#x2F;usr&#x2F;local</span><br><span class="line">$ make</span><br><span class="line">$ make install # may require extra privileges depending on where to install</span><br></pre></td></tr></table></figure></li>
+<li>创建文件<code>~/.ctags.d/my.ctags</code>文件用来配置，比如可以加入配置行<code>--output-format=e-ctags</code>以保持跟exuberant ctags兼容。 </li>
+</ul>
+<h3 id="安装vim-gutentags"><a href="#安装vim-gutentags" class="headerlink" title="安装vim-gutentags"></a>安装<a href="https://github.com/ludovicchabant/vim-gutentags" target="_blank" rel="noopener">vim-gutentags</a></h3><ul>
+<li>安装<code>Plug &#39;ludovicchabant/vim-gutentags&#39;</code></li>
+<li>配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&quot; gutentags 搜索工程目录的标志，碰到这些文件&#x2F;目录名就停止向上一级目录递归</span><br><span class="line">let g:gutentags_project_root &#x3D; [&#39;.root&#39;, &#39;.svn&#39;, &#39;.git&#39;, &#39;.hg&#39;, &#39;.project&#39;]</span><br><span class="line"></span><br><span class="line">&quot; 所生成的数据文件的名称</span><br><span class="line">let g:gutentags_ctags_tagfile &#x3D; &#39;tags&#39;</span><br><span class="line"></span><br><span class="line">&quot; 配置 ctags 的参数</span><br><span class="line">let g:gutentags_ctags_extra_args &#x3D; [&#39;--fields&#x3D;+niazS&#39;, &#39;--extra&#x3D;+q&#39;]</span><br><span class="line">let g:gutentags_ctags_extra_args +&#x3D; [&#39;--c++-kinds&#x3D;+px&#39;]</span><br><span class="line">let g:gutentags_ctags_extra_args +&#x3D; [&#39;--c-kinds&#x3D;+px&#39;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h3><ul>
+<li>命令<ul>
+<li>命令行下<code>ctags -R .</code>或者vim中<code>:!ctags -R .</code>生成tags文件,-f 参数可以指定生成文件的路径。 </li>
+<li>CTRL-]跳转定义</li>
+<li>CTRL-O跳回</li>
+<li>CTRL-W ] 新窗口打开定义</li>
+<li>:ts tag 搜索tag</li>
+<li>:tn 跳转到下一个定义</li>
+<li>:tp 跳转到上一个定义</li>
+<li>:ts 列出所有定义</li>
+<li>:tf 跳转到第一个定义</li>
+<li>:tl 跳转到最后一个定义</li>
+<li>:tselect 选择跳转到哪一个</li>
+<li>CTRL-t 回退到上一个tag stack</li>
+</ul>
+</li>
+<li>参考链接<ul>
+<li><a href="https://andrew.stwrt.ca/posts/vim-ctags/" target="_blank" rel="noopener">https://andrew.stwrt.ca/posts/vim-ctags/</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="状态栏"><a href="#状态栏" class="headerlink" title="状态栏"></a>状态栏</h2><p>安装<a href="https://github.com/vim-airline/vim-airline" target="_blank" rel="noopener">vim-airline</a></p>
+<h2 id="函数列表"><a href="#函数列表" class="headerlink" title="函数列表"></a>函数列表</h2><ul>
+<li>安装<a href="https://github.com/Yggdroot/LeaderF" target="_blank" rel="noopener">LeaderF</a> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Plug &#39;Yggdroot&#x2F;LeaderF&#39;, &#123; &#39;do&#39;: &#39;.&#x2F;install.sh&#39; &#125;</span><br><span class="line">noremap &lt;C-P&gt; :LeaderfFile&lt;CR&gt;</span><br><span class="line">noremap &lt;C-S-O&gt; :LeaderfFunction!&lt;CR&gt;</span><br><span class="line">noremap &lt;C-N&gt; :LeaderfMru&lt;CR&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let g:Lf_ShowRelativePath &#x3D; 0</span><br><span class="line">let g:Lf_HideHelp &#x3D; 1</span><br><span class="line">let g:Lf_PreviewResult &#x3D; &#123;&#39;Function&#39;:0, &#39;Colorscheme&#39;:1&#125;</span><br><span class="line"></span><br><span class="line">let g:Lf_NormalMap &#x3D; &#123;</span><br><span class="line">	\ &quot;File&quot;:   [[&quot;&lt;ESC&gt;&quot;, &#39;:exec g:Lf_py &quot;fileExplManager.quit()&quot;&lt;CR&gt;&#39;]],</span><br><span class="line">	\ &quot;Buffer&quot;: [[&quot;&lt;ESC&gt;&quot;, &#39;:exec g:Lf_py &quot;bufExplManager.quit()&quot;&lt;CR&gt;&#39;]],</span><br><span class="line">	\ &quot;Mru&quot;:    [[&quot;&lt;ESC&gt;&quot;, &#39;:exec g:Lf_py &quot;mruExplManager.quit()&quot;&lt;CR&gt;&#39;]],</span><br><span class="line">	\ &quot;Tag&quot;:    [[&quot;&lt;ESC&gt;&quot;, &#39;:exec g:Lf_py &quot;tagExplManager.quit()&quot;&lt;CR&gt;&#39;]],</span><br><span class="line">	\ &quot;Function&quot;:    [[&quot;&lt;ESC&gt;&quot;, &#39;:exec g:Lf_py &quot;functionExplManager.quit()&quot;&lt;CR&gt;&#39;]],</span><br><span class="line">	\ &quot;Colorscheme&quot;:    [[&quot;&lt;ESC&gt;&quot;, &#39;:exec g:Lf_py &quot;colorschemeExplManager.quit()&quot;&lt;CR&gt;&#39;]],</span><br><span class="line">	\ &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h3><ul>
+<li><code>:LeaderfCommand</code>进入后按<code>i</code>可以进入模糊匹配</li>
+<li><code>Ctrl-N</code>搜索最近打开的文件</li>
+</ul>
+<h2 id="折叠"><a href="#折叠" class="headerlink" title="折叠"></a>折叠</h2><p>安装<a href="https://github.com/tmhedberg/SimpylFold" target="_blank" rel="noopener">SimpylFold</a> <code>Plug &#39;tmhedberg/SimpylFold&#39;</code></p>
+<ul>
+<li>visual mode选中，<code>z-F</code>折叠，然后<code>zc</code>关闭折叠，<code>zo</code>打开折叠</li>
+</ul>
+<h2 id="文件比较"><a href="#文件比较" class="headerlink" title="文件比较"></a>文件比较</h2><p>安装<a href="https://github.com/mhinz/vim-signify" target="_blank" rel="noopener">vim-signify</a><code>Plug &#39;mhinz/vim-signify&#39;</code></p>
+<ul>
+<li><code>:SignifyDiff</code> 可以分屏对比diff</li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>安装<a href="https://github.com/tpope/vim-vinegar" target="_blank" rel="noopener">vim-vinegar</a> <code>Plug &#39;tpope/vim-vinegar&#39;</code></li>
+<li>使用，基本同netrw<ul>
+<li>:Explore - opens netrw in the current window</li>
+<li>:Sexplore - opens netrw in a horizontal split</li>
+<li>:Vexplore - opens netrw in a vertical split</li>
+<li>按<code>-</code>往上走，按<code>Enter</code>往下走</li>
+</ul>
+</li>
+</ul>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ul>
+<li>Vim中ALT键都留给用户了，所以多用ALT来映射快捷键</li>
+<li>额外快捷键配置 <a href="https://github.com/tpope/vim-unimpaired" target="_blank" rel="noopener">https://github.com/tpope/vim-unimpaired</a></li>
+</ul>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><ul>
+<li><a href="https://www.zhihu.com/question/47691414" target="_blank" rel="noopener">https://www.zhihu.com/question/47691414</a></li>
+<li><a href="https://juejin.im/post/5cdc396af265da03576ee968" target="_blank" rel="noopener">https://juejin.im/post/5cdc396af265da03576ee968</a></li>
+<li><a href="https://www.zhihu.com/question/31934850" target="_blank" rel="noopener">https://www.zhihu.com/question/31934850</a></li>
+<li><a href="http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/" target="_blank" rel="noopener">http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/</a></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+
+        
+
+    </article>
+
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '366c14e3419153f51738',
+        clientSecret: '7b9f17b0ec13ffd9fd44c85285bb57d8bcbdb3f0',
+        id: window.location.pathname,
+        repo: 'blog-comments',
+        owner: 'qindazhu',
+        admin: 'qindazhu'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+    
+
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Qin Dazhu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+
+    
+    
+    <script src="/js/canvas-nest/canvas-nest-nomobile.min.js" color="0,0,0" opacity="0.5" zIndex="-1" count="80" ></script>
+    
+
+</body>
+</html>

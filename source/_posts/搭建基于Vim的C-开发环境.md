@@ -89,11 +89,7 @@ let g:ycm_key_invoke_completion = '<c-z>'
 set completeopt=menu,menuone
 
 noremap <c-z> <NOP>
-
-let g:ycm_semantic_triggers =  {
-			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-			\ 'cs,lua,javascript': ['re!\w{2}'],
-			\ }          
+         
 {% endcodeblock %}
 - 注意，如果遇到`ycmd server shut down`的错误，一般重新运行下YCM下的`install.py`就行。
 - 如果遇到`python3 missing file header`的问题，`sudo apt-get install python3-dev`安装`python3-dev`就行。
@@ -207,9 +203,7 @@ $ ./configure --prefix=/where/you/want # defaults to /usr/local
 $ make
 $ make install # may require extra privileges depending on where to install
 ```
-- 在`/usr/local/bin`下确认是否已经安装
-- 在`~/.vimrc`中配置`set tags=./.tags;,.tags`
-- 如果安装的是universal ctags ，在`~/.ctags`中加入配置行`--output-format=e-ctags`以保持跟exuberant ctags兼容。
+- 创建文件`~/.ctags.d/my.ctags`文件用来配置，比如可以加入配置行`--output-format=e-ctags`以保持跟exuberant ctags兼容。 
 
 ### 安装[vim-gutentags](https://github.com/ludovicchabant/vim-gutentags)
 - 安装`Plug 'ludovicchabant/vim-gutentags'`
@@ -219,21 +213,13 @@ $ make install # may require extra privileges depending on where to install
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 
 " 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
-
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
+let g:gutentags_ctags_tagfile = 'tags'
 
 " 配置 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
-" 检测 ~/.cache/tags 不存在就新建
-if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
-endif
 {% endcodeblock %}
 
 ### 用法
